@@ -1,0 +1,108 @@
+import 'package:flutter/material.dart';
+
+class CourseCardPage extends StatelessWidget {
+  final List<Map<String, String>> courses = [
+    {
+      "title": "Full Stack Web Development with JavaScript (MERN)",
+      "batch": "ব্যাচ ৬",
+      "duration": "৬ মাসের ব্যাচ",
+      "time": "৬ দিন বাকি",
+      "image": "assets/mern.png",
+    },
+    {
+      "title": "Full Stack Web Development with Python, Django & React",
+      "batch": "ব্যাচ ৬",
+      "duration": "৬ মাসের ব্যাচ",
+      "time": "৬ দিন বাকি",
+      "image": "assets/django.png",
+    },
+    {
+      "title": "Full Stack Web Development with ASP.Net Core",
+      "batch": "ব্যাচ ৪",
+      "duration": "৬ মাসের ব্যাচ",
+      "time": "৬ দিন বাকি",
+      "image": "assets/aspnet.png",
+    },
+    {
+      "title": "SQA: Manual & Automated Testing",
+      "batch": "ব্যাচ ৩০",
+      "duration": "৩ মাসের ব্যাচ",
+      "time": "৬ দিন বাকি",
+      "image": "assets/sqa.png",
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Courses")),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, 
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 0.75, 
+          ),
+          itemCount: courses.length,
+          itemBuilder: (context, index) {
+            final course = courses[index];
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              elevation: 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                    child: Image.asset(
+                      course["image"]!,
+                      height: 120,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Wrap(
+                          spacing: 6,
+                          children: [
+                            Chip(label: Text(course["batch"]!)),
+                            Chip(label: Text(course["duration"]!)),
+                            Chip(label: Text(course["time"]!)),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          course["title"]!,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("বিস্তারিত দেখুন"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
